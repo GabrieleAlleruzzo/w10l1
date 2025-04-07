@@ -7,6 +7,7 @@ import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import MyNav from "./assets/MyComponents/MyNav.jsx";
 import Welcome from "./assets/MyComponents/Welcome.jsx";
 import MyFooter from "./assets/MyComponents/MyFooter.jsx";
+import AllTheBooks from "./assets/MyComponents/AllTheBooks.jsx";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -18,10 +19,11 @@ function App() {
       <header>
         <MyNav />
       </header>
-      <main className="flex-grow-1">
+      <main className="flex-grow-1 m-5">
         {" "}
-        {/* Main si espande per occupare lo spazio disponibile */}
         <Welcome />
+        <AllTheBooks />
+        {/* Main si espande per occupare lo spazio disponibile */}
       </main>
       <footer>
         <MyFooter />

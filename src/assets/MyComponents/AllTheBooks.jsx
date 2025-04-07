@@ -1,5 +1,6 @@
-import { Card, Col, Row } from 'react-bootstrap'
-import fantasy from '../data/fantasy.json'
+import { Card, Col, Row } from "react-bootstrap";
+import fantasy from "../data/fantasy.json";
+import CommentArea from "./CommentArea";
 
 const AllTheBooks = () => {
   return (
@@ -12,12 +13,13 @@ const AllTheBooks = () => {
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
               </Card.Body>
+              <CommentArea />
             </Card>
           </Col>
-        )
+        );
       })}
     </Row>
-  )
-}
+  );
+};
 
-export default AllTheBooks
+export default AllTheBooks;
