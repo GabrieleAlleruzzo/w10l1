@@ -2,7 +2,7 @@ import { useState } from "react";
 import reactLogo from "./assets/react.svg";
 import Main from "react";
 
-import "./App.css";
+// import "./App.css";
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import MyNav from "./assets/MyComponents/MyNav.jsx";
 import Welcome from "./assets/MyComponents/Welcome.jsx";
@@ -12,13 +12,21 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <>
-      <MyNav />
-      <main className=" d-flex align-items-center flex-grow-1">
+    <div className="d-flex flex-column min-vh-100">
+      {" "}
+      {/* Contenitore flex verticale che occupa almeno tutta l'altezza */}
+      <header>
+        <MyNav />
+      </header>
+      <main className="flex-grow-1">
+        {" "}
+        {/* Main si espande per occupare lo spazio disponibile */}
         <Welcome />
       </main>
-      <MyFooter />
-    </>
+      <footer>
+        <MyFooter />
+      </footer>
+    </div>
   );
 }
 
