@@ -1,4 +1,4 @@
-import { Card, Col, Row } from "react-bootstrap";
+import { Card, Col, Row, CardText } from "react-bootstrap";
 import fantasy from "../data/fantasy.json";
 import CommentArea from "./CommentArea";
 
@@ -13,7 +13,8 @@ const AllTheBooks = () => {
               <Card.Body>
                 <Card.Title>{book.title}</Card.Title>
               </Card.Body>
-              <CommentArea />
+              {/* Pass the asin prop here */}
+              <CommentArea asin={book.asin} />
             </Card>
           </Col>
         );
