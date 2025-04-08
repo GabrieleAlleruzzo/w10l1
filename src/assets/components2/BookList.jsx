@@ -1,23 +1,24 @@
-import { Component } from "react";
-import SingleBook from "./SingleBook";
-import { Col, Form, Row } from "react-bootstrap";
+import { Component } from 'react'
+import SingleBook from './SingleBook'
+import { Col, Form, Row } from 'react-bootstrap'
+import CommentArea from './CommentArea'
 
 class BookList extends Component {
   state = {
-    searchQuery: "",
+    searchQuery: '',
     selectedBook: null,
-  };
+  }
 
   changeSelectedBook = (asin) => {
     this.setState({
       selectedBook: asin,
-    });
-  };
+    })
+  }
 
   render() {
     return (
       <>
-        <Row className="justify-content-center mt-5">
+        <Row>
           <Col md={8}>
             <Row className="justify-content-center mt-5">
               <Col xs={12} md={4} className="text-center">
@@ -49,10 +50,13 @@ class BookList extends Component {
                 ))}
             </Row>
           </Col>
+          <Col md={4}>
+            <CommentArea asin={this.state.selectedBook} />
+          </Col>
         </Row>
       </>
-    );
+    )
   }
 }
 
-export default BookList;
+export default BookList

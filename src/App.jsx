@@ -8,22 +8,21 @@ import MyNav from "./assets/MyComponents/MyNav.jsx";
 import Welcome from "./assets/MyComponents/Welcome.jsx";
 import MyFooter from "./assets/MyComponents/MyFooter.jsx";
 import AllTheBooks from "./assets/MyComponents/AllTheBooks.jsx";
+import BookList from "./assets/MyComponents/BookList.jsx";
+// per funzionare l'import di fantasy deve stare cosi, non so perché
+import fantasy from "../src/assets/Data/fantasy.json";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="d-flex flex-column min-vh-100">
       {" "}
-      {/* Contenitore flex verticale che occupa almeno tutta l'altezza */}
       <header>
         <MyNav />
       </header>
       <main className="flex-grow-1 m-5">
-        {" "}
+        {/*  <AllTheBooks />*/}
         <Welcome />
-        <AllTheBooks />
-        {/* Main si espande per occupare lo spazio disponibile */}
+        <BookList books={fantasy} />
       </main>
       <footer>
         <MyFooter />

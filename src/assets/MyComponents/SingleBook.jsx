@@ -19,7 +19,6 @@ class SingleBook extends Component {
             <Card.Title style={{ color: "black" }}>
               {this.props.book.title}
             </Card.Title>
-            <CardText>{this.props.book.price}</CardText>
           </Card.Body>
         </Card>
         {this.state.selected && <CommentArea asin={this.props.book.asin} />}

@@ -1,53 +1,62 @@
 import { Component } from "react";
-import CommentList from "./CommentList";
-import AddComment from "./AddComment";
-import Loading from "./Loading";
-import Error from "./Error";
+import SingleBook from "./SingleBook";
+import { Col, Form, Row } from "react-bootstrap";
+import CommentArea from "./CommentArea";
 
-class CommentArea extends Component {
+class BookList extends Component {
   state = {
-    comments: [],
-    isLoading: true,
-    isError: false,
+    searchQuery: "",
+    selectedBook: null,
   };
 
-  componentDidMount = async () => {
-    try {
-      let response = await fetch(
-        "https://striveschool-api.herokuapp.com/api/comments/" +
-          this.props.asin,
-        {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2N2Y0ZjM5MTgxYjBkZDAwMTUwYTdhNGYiLCJpYXQiOjE3NDQxMDYzODUsImV4cCI6MTc0NTMxNTk4NX0.y3XGldoBZKhMBd62d6B7SCpyMKy9qtodN_3ICNwaY-Q",
-          },
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        let comments = await response.json();
-        this.setState({ comments: comments, isLoading: false, isError: false });
-      } else {
-        this.setState({ isLoading: false, isError: true });
-      }
-    } catch (error) {
-      console.log(error);
-      this.setState({ isLoading: false, isError: true });
-    }
+  changeSelectedBook = (asin) => {
+    this.setState({
+      selectedBook: asin,
+    });
   };
 
   render() {
     return (
-      <div className="text-center">
-        {this.state.isLoading && <Loading />}
-        {this.state.isError && <Error />}
-        <AddComment asin={this.props.asin} />
-        <CommentList commentsToShow={this.state.comments} />
-      </div>
+      <>
+        <Row>
+          <Col md={8}>
+            <Row className="justify-content-center mt-5">
+              <Col xs={12} md={4} className="text-center">
+                <Form.Group>
+                  <Form.Control
+                    type="search"
+                    placeholder="Cerca un libro"
+                    value={this.state.searchQuery}
+                    onChange={(e) =>
+                      this.setState({ searchQuery: e.target.value })
+                    }
+                  />
+                </Form.Group>
+              </Col>
+            </Row>
+            <Row className="g-2 mt-3">
+              {this.props.books
+                .filter((b) =>
+                  b.title.toLowerCase().includes(this.state.searchQuery)
+                )
+                .map((b) => (
+                  <Col xs={12} md={4} key={b.asin}>
+                    <SingleBook
+                      book={b}
+                      selectedBook={this.state.selectedBook}
+                      changeSelectedBook={this.changeSelectedBook}
+                    />
+                  </Col>
+                ))}
+            </Row>
+          </Col>
+          <Col md={4}>
+            <CommentArea asin={this.state.selectedBook} />
+          </Col>
+        </Row>
+      </>
     );
   }
 }
 
-export default CommentArea;
-
-// error 503
+export default BookList;
